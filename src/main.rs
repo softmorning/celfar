@@ -8,7 +8,7 @@ fn main() {
         std::process::exit(1);
     });
 
-    println!("{}", temp_conv(&tcfg).round());
+    println!("{}", tcfg.temp_conv().round());
 }
 
 struct TempConfig {
@@ -34,12 +34,20 @@ impl TempConfig {
 
         Ok(TempConfig { temp, unit })
     }
-}
 
-fn temp_conv(cfg: &TempConfig) -> f64 {
-    match cfg.unit.as_str() {
-        "f" => (cfg.temp * 1.8) + 32.0,
-        "c" => (cfg.temp - 32.0) / 1.8,
-        _ => 0.0 // This never happens and my rust knowledge is not very extensive, no clue if this is a good practice or not. Gut says no.
+    fn temp_conv(&self) -> f64 {
+        match self.unit.as_str() {
+            "f" => (self.temp * 1.8) + 32.0,
+            "c" => (self.temp - 32.0) / 1.8,
+            _ => 0.0 // This never happens and my rust knowledge is not very extensive, no clue if this is a good practice or not. Gut says no.
+        }
     }
 }
+
+// fn temp_conv(cfg: &TempConfig) -> f64 {
+//     match cfg.unit.as_str() {
+//         "f" => (cfg.temp * 1.8) + 32.0,
+//         "c" => (cfg.temp - 32.0) / 1.8,
+//         _ => 0.0 // This never happens and my rust knowledge is not very extensive, no clue if this is a good practice or not. Gut says no.
+//     }
+// }
