@@ -11,9 +11,14 @@ fn main() {
     println!("{}", tcfg.temp_conv().round());
 }
 
+enum Unit{
+    Celsius,
+    Fahrenheit,
+}
+
 struct TempConfig {
     temp: f64,
-    unit: String,
+    unit: Unit,
 }
 
 impl TempConfig {
@@ -26,9 +31,9 @@ impl TempConfig {
             Ok(n) => n,
             Err(_) => return Err("invalid temp"),
         };
-        let unit: String = match args[2].to_lowercase().as_str() {
-            "f" => "f".to_string(),
-            "c" => "c".to_string(),
+        let unit: Unit = match args[2].to_lowercase().as_str() {
+            "f" => Unit::Fahrenheit,
+            "c" => Unit::Celsius,
             _ => return Err("invalid unit"),
         };
 
@@ -36,10 +41,9 @@ impl TempConfig {
     }
 
     fn temp_conv(&self) -> f64 {
-        match self.unit.as_str() {
-            "f" => (self.temp * 1.8) + 32.0,
-            "c" => (self.temp - 32.0) / 1.8,
-            _ => 0.0 // This never happens and my rust knowledge is not very extensive, no clue if this is a good practice or not. Gut says no.
+        match self.unit {
+            Unit::Fahrenheit => (self.temp * 1.8) + 32.0,
+            Unit::Celsius => (self.temp - 32.0) / 1.8,
         }
     }
 }
