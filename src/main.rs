@@ -43,11 +43,3 @@ impl TempConfig {
         }
     }
 }
-
-// fn temp_conv(cfg: &TempConfig) -> f64 {
-//     match cfg.unit.as_str() {
-//         "f" => (cfg.temp * 1.8) + 32.0,
-//         "c" => (cfg.temp - 32.0) / 1.8,
-//         _ => 0.0 // This never happens and my rust knowledge is not very extensive, no clue if this is a good practice or not. Gut says no.
-//     }
-// }
