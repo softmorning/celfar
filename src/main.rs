@@ -11,7 +11,7 @@ fn main() {
     println!("{}", tcfg.temp_conv().round());
 }
 
-enum Unit{
+enum Unit {
     Celsius,
     Fahrenheit,
 }
